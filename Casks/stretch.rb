@@ -1,18 +1,22 @@
 cask "stretch" do
-  version "1.0.0" 
-  sha256 "67b5762985b7006ce01773b3f9496f0939a162c77e14c97b51037f0601a291e6"
+  version "1.0.0"
 
-  url "https://github.com/praveensankar969/Stretch/releases/download/v#{version}/Stretch-#{version}.dmg"
-  
+  if Hardware::CPU.intel?
+    sha256 "b6b5d95321bbc84bf87ff7c1604066962fcbb7e7e34d38dcccf5696b79c8d846"
+    url "https://github.com/praveensankar969/Stretch/releases/download/v#{version}/Stretch-#{version}-x64.dmg"
+  else
+    sha256 "67404871119505e3ef675504ac0d9c9e3235340b72335eb0c85ececc004f3cb4"
+    url "https://github.com/praveensankar969/Stretch/releases/download/v#{version}/Stretch-#{version}-arm64.dmg"
+  end
+
   name "Stretch"
-  desc "A calm, local-only stretch reminder for macOS"
-  homepage "https://stretchapp.in"
+  desc "A calm, local-only stretch reminder"
+  homepage "https://github.com/praveensankar969/Stretch"
 
   app "Stretch.app"
 
   zap trash: [
     "~/Library/Application Support/Stretch",
     "~/Library/Preferences/com.stretchapp.in.plist",
-    "~/Library/Saved Application State/com.stretchapp.in.savedState",
   ]
 end
